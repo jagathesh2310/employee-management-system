@@ -1,0 +1,15 @@
+{
+    "agents": [
+        "antigravity",
+        "cursor"
+    ],
+    "cloud": false,
+    "guidelines": true,
+    "mcp": true,
+    "nightwatch": false,
+    "sail": true,
+    "skills": [
+        "laravel-best-practices",
+        "tailwindcss-development"
+    ]
+}
