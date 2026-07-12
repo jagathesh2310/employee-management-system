@@ -111,6 +111,8 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 # Laravel Sail
 
 - This project runs inside Laravel Sail's Docker containers. You MUST execute all commands through Sail.
+- **Agent Initialization**: In your very first iteration on a task, you should check if the Sail containers are running (e.g., using `docker ps`). If they are not running, or if you encounter connection/DNS issues, cleanly start them using `vendor/bin/sail up -d` (or `vendor/bin/sail down && vendor/bin/sail up -d` to rebuild the network).
+- **Windows/WSL Compatibility**: If you are operating on a Windows host, you must run all Sail and Docker commands through WSL by prefixing them with `wsl -e bash -c "cd /path/to/project && ./vendor/bin/sail ..."` to ensure they execute correctly.
 - Start services using `vendor/bin/sail up -d` and stop them with `vendor/bin/sail stop`.
 - Open the application in the browser by running `vendor/bin/sail open`.
 - Always prefix PHP, Artisan, Composer, and Node commands with `vendor/bin/sail`. Examples:

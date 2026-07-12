@@ -6,8 +6,6 @@ use App\Models\Department;
 use App\Models\User;
 
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\getJson;
-use function Pest\Laravel\postJson;
 
 it('lists departments for authenticated users', function () {
     // Arrange
@@ -21,9 +19,9 @@ it('lists departments for authenticated users', function () {
     $response->assertOk()
         ->assertJsonStructure([
             'data' => [
-                '*' => ['id', 'name', 'code', 'description']
+                '*' => ['id', 'name', 'code', 'description'],
             ],
-            'meta'
+            'meta',
         ]);
 });
 
@@ -42,14 +40,14 @@ it('allows admin to create a department', function () {
     // Assert
     $response->assertCreated()
         ->assertJsonPath('name', 'Human Resources');
-        
+
     $this->assertDatabaseHas('departments', ['code' => 'HR']);
 });
 
 it('prevents regular users from creating a department', function () {
     // Arrange
     $user = User::factory()->create(['role' => 'employee']);
-    
+
     // Act
     $response = actingAs($user)->postJson('/api/v1/departments', [
         'name' => 'IT Department',

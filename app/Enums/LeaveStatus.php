@@ -21,14 +21,14 @@ namespace App\Enums;
  */
 enum LeaveStatus: string
 {
-    case Pending  = 'pending';
+    case Pending = 'pending';
     case Approved = 'approved';
     case Rejected = 'rejected';
 
     public function label(): string
     {
         return match ($this) {
-            self::Pending  => 'Pending',
+            self::Pending => 'Pending',
             self::Approved => 'Approved',
             self::Rejected => 'Rejected',
         };
@@ -37,7 +37,7 @@ enum LeaveStatus: string
     public function color(): string
     {
         return match ($this) {
-            self::Pending  => 'yellow',
+            self::Pending => 'yellow',
             self::Approved => 'green',
             self::Rejected => 'red',
         };

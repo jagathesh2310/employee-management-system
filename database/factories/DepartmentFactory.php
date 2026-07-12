@@ -38,8 +38,8 @@ class DepartmentFactory extends Factory
         ]);
 
         return [
-            'name'        => $name,
-            'code'        => strtoupper(substr(preg_replace('/[^A-Z]/', '', strtoupper($name)), 0, 4)),
+            'name' => $name,
+            'code' => strtoupper(substr(preg_replace('/[^A-Z]/', '', strtoupper($name)), 0, 4)),
             'description' => $this->faker->sentence(12),
         ];
     }

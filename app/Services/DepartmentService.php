@@ -54,7 +54,7 @@ class DepartmentService
     {
         // Business logic (if any) would go here before calling the repository.
         // E.g., external API validation, firing custom "before" events.
-        
+
         return $this->departmentRepository->create($data->toArray());
     }
 

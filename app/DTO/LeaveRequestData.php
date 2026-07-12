@@ -26,10 +26,10 @@ final class LeaveRequestData
     {
         return new self(
             employeeId: $validated['employee_id'],
-            leaveType:  LeaveType::from($validated['leave_type']),
-            startDate:  $validated['start_date'],
-            endDate:    $validated['end_date'],
-            reason:     $validated['reason'] ?? null,
+            leaveType: LeaveType::from($validated['leave_type']),
+            startDate: $validated['start_date'],
+            endDate: $validated['end_date'],
+            reason: $validated['reason'] ?? null,
         );
     }
 
@@ -40,11 +40,11 @@ final class LeaveRequestData
     {
         return [
             'employee_id' => $this->employeeId,
-            'leave_type'  => $this->leaveType->value,
-            'start_date'  => $this->startDate,
-            'end_date'    => $this->endDate,
-            'reason'      => $this->reason,
-            'status'      => 'pending', // Always starts as pending
+            'leave_type' => $this->leaveType->value,
+            'start_date' => $this->startDate,
+            'end_date' => $this->endDate,
+            'reason' => $this->reason,
+            'status' => 'pending', // Always starts as pending
         ];
     }
 }

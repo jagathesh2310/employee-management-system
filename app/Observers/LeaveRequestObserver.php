@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Observers;
 
+use App\Enums\LeaveStatus;
 use App\Events\LeaveApproved;
 use App\Events\LeaveRejected;
 use App\Events\LeaveRequested;
-use App\Enums\LeaveStatus;
 use App\Models\LeaveRequest;
 use Illuminate\Support\Facades\Log;
 
@@ -31,9 +31,9 @@ class LeaveRequestObserver
         LeaveRequested::dispatch($leaveRequest);
 
         Log::info('Leave request submitted', [
-            'leave_id'    => $leaveRequest->id,
+            'leave_id' => $leaveRequest->id,
             'employee_id' => $leaveRequest->employee_id,
-            'type'        => $leaveRequest->leave_type->value,
+            'type' => $leaveRequest->leave_type->value,
         ]);
     }
 

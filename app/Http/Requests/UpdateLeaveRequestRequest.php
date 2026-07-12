@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Requests;
 
 use App\Enums\LeaveType;
-use App\Rules\NoOverlappingLeave;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,10 +23,10 @@ class UpdateLeaveRequestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'leave_type'  => ['sometimes', 'required', Rule::enum(LeaveType::class)],
-            'start_date'  => ['sometimes', 'required', 'date'],
-            'end_date'    => ['sometimes', 'required', 'date', 'after_or_equal:start_date'],
-            'reason'      => ['nullable', 'string', 'max:1000'],
+            'leave_type' => ['sometimes', 'required', Rule::enum(LeaveType::class)],
+            'start_date' => ['sometimes', 'required', 'date'],
+            'end_date' => ['sometimes', 'required', 'date', 'after_or_equal:start_date'],
+            'reason' => ['nullable', 'string', 'max:1000'],
         ];
     }
 }

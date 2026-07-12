@@ -21,7 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
         );
 
         // Catch domain exceptions and return 400 Bad Request instead of 500
-        $exceptions->render(function (\DomainException $e, Request $request) {
+        $exceptions->render(function (DomainException $e, Request $request) {
             if ($request->is('api/*')) {
                 return response()->json([
                     'message' => $e->getMessage(),

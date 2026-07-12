@@ -45,8 +45,8 @@ class PositionFactory extends Factory
         $pick = $this->faker->unique()->randomElement($positions);
 
         return [
-            'name'        => $pick['name'],
-            'level'       => $pick['level'],
+            'name' => $pick['name'],
+            'level' => $pick['level'],
             'description' => $this->faker->sentence(10),
         ];
     }

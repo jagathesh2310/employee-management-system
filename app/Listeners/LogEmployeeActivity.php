@@ -7,7 +7,6 @@ namespace App\Listeners;
 use App\Events\EmployeeCreated;
 use App\Events\EmployeeDeleted;
 use App\Events\EmployeeUpdated;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -31,12 +30,12 @@ class LogEmployeeActivity
     public function handleEmployeeCreated(EmployeeCreated $event): void
     {
         Log::info('Employee created', [
-            'employee_id'    => $event->employee->id,
-            'employee_code'  => $event->employee->employee_id,
-            'name'           => $event->employee->full_name,
-            'department_id'  => $event->employee->department_id,
-            'position_id'    => $event->employee->position_id,
-            'created_at'     => now()->toIso8601String(),
+            'employee_id' => $event->employee->id,
+            'employee_code' => $event->employee->employee_id,
+            'name' => $event->employee->full_name,
+            'department_id' => $event->employee->department_id,
+            'position_id' => $event->employee->position_id,
+            'created_at' => now()->toIso8601String(),
         ]);
     }
 
@@ -44,8 +43,8 @@ class LogEmployeeActivity
     {
         Log::info('Employee updated', [
             'employee_id' => $event->employee->id,
-            'changes'     => $event->changes,
-            'updated_at'  => now()->toIso8601String(),
+            'changes' => $event->changes,
+            'updated_at' => now()->toIso8601String(),
         ]);
     }
 
@@ -53,8 +52,8 @@ class LogEmployeeActivity
     {
         Log::warning('Employee deleted (soft)', [
             'employee_id' => $event->employee->id,
-            'name'        => $event->employee->full_name,
-            'deleted_at'  => now()->toIso8601String(),
+            'name' => $event->employee->full_name,
+            'deleted_at' => now()->toIso8601String(),
         ]);
     }
 }

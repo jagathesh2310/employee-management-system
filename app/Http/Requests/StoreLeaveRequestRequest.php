@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Requests;
 
 use App\Enums\LeaveType;
+use App\Models\LeaveRequest;
 use App\Rules\NoOverlappingLeave;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 
 /**
  * StoreLeaveRequestRequest – validates new leave request submission.
@@ -23,7 +25,7 @@ class StoreLeaveRequestRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->user()?->can('create', \App\Models\LeaveRequest::class) ?? false;
+        return $this->user()?->can('create', LeaveRequest::class) ?? false;
     }
 
     /**
@@ -33,15 +35,15 @@ class StoreLeaveRequestRequest extends FormRequest
     {
         return [
             'employee_id' => ['required', 'uuid', 'exists:employees,id'],
-            'leave_type'  => ['required', Rule::enum(LeaveType::class)],
-            'start_date'  => ['required', 'date', 'after_or_equal:today'],
+            'leave_type' => ['required', Rule::enum(LeaveType::class)],
+            'start_date' => ['required', 'date', 'after_or_equal:today'],
             // end_date must be after or equal to start_date
-            'end_date'    => [
+            'end_date' => [
                 'required',
                 'date',
                 'after_or_equal:start_date', // Cross-field validation using another field name
             ],
-            'reason'      => ['nullable', 'string', 'max:1000'],
+            'reason' => ['nullable', 'string', 'max:1000'],
         ];
     }
 
@@ -53,17 +55,17 @@ class StoreLeaveRequestRequest extends FormRequest
      *   We add it here (after basic rules pass) to ensure both dates exist.
      *   This avoids running a DB query when the dates are invalid.
      */
-    public function withValidator(\Illuminate\Validation\Validator $validator): void
+    public function withValidator(Validator $validator): void
     {
-        $validator->after(function (\Illuminate\Validation\Validator $v) {
+        $validator->after(function (Validator $v) {
             if ($v->errors()->has('start_date') || $v->errors()->has('end_date')) {
                 return; // Don't check overlap if dates are already invalid
             }
 
             $rule = new NoOverlappingLeave(
                 employeeId: $this->input('employee_id'),
-                startDate:  $this->input('start_date'),
-                endDate:    $this->input('end_date'),
+                startDate: $this->input('start_date'),
+                endDate: $this->input('end_date'),
             );
 
             $rule->validate('start_date', $this->input('start_date'), function (string $message) use ($v) {

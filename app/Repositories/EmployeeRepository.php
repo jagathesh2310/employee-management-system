@@ -42,6 +42,11 @@ class EmployeeRepository implements EmployeeRepositoryInterface
      */
     private const SORTABLE_COLUMNS = ['first_name', 'last_name', 'joining_date', 'salary', 'created_at'];
 
+    public function all(): Collection
+    {
+        return Employee::all();
+    }
+
     public function paginate(array $filters = [], int $perPage = 15): LengthAwarePaginator
     {
         // WHY withoutGlobalScope:
@@ -97,7 +102,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface
         }
 
         // Sorting – using whitelisted columns only
-        $sortBy        = in_array($filters['sort_by'] ?? null, self::SORTABLE_COLUMNS, true)
+        $sortBy = in_array($filters['sort_by'] ?? null, self::SORTABLE_COLUMNS, true)
             ? $filters['sort_by']
             : 'created_at';
         $sortDirection = ($filters['sort_dir'] ?? 'desc') === 'asc' ? 'asc' : 'desc';

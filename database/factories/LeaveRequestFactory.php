@@ -23,15 +23,15 @@ class LeaveRequestFactory extends Factory
     public function definition(): array
     {
         $startDate = $this->faker->dateTimeBetween('-2 years', '+3 months');
-        $endDate   = (clone $startDate)->modify('+' . $this->faker->numberBetween(1, 14) . ' days');
+        $endDate = (clone $startDate)->modify('+'.$this->faker->numberBetween(1, 14).' days');
 
         return [
             'employee_id' => Employee::factory(),
-            'leave_type'  => $this->faker->randomElement(LeaveType::cases()),
-            'start_date'  => $startDate->format('Y-m-d'),
-            'end_date'    => $endDate->format('Y-m-d'),
-            'reason'      => $this->faker->sentence(8),
-            'status'      => LeaveStatus::Pending,
+            'leave_type' => $this->faker->randomElement(LeaveType::cases()),
+            'start_date' => $startDate->format('Y-m-d'),
+            'end_date' => $endDate->format('Y-m-d'),
+            'reason' => $this->faker->sentence(8),
+            'status' => LeaveStatus::Pending,
             'approved_by' => null,
             'approved_at' => null,
         ];
@@ -44,7 +44,7 @@ class LeaveRequestFactory extends Factory
     public function pending(): static
     {
         return $this->state(fn (array $attributes) => [
-            'status'      => LeaveStatus::Pending,
+            'status' => LeaveStatus::Pending,
             'approved_by' => null,
             'approved_at' => null,
         ]);
@@ -53,7 +53,7 @@ class LeaveRequestFactory extends Factory
     public function approved(): static
     {
         return $this->state(fn (array $attributes) => [
-            'status'      => LeaveStatus::Approved,
+            'status' => LeaveStatus::Approved,
             'approved_at' => now(),
         ]);
     }
@@ -61,7 +61,7 @@ class LeaveRequestFactory extends Factory
     public function rejected(): static
     {
         return $this->state(fn (array $attributes) => [
-            'status'      => LeaveStatus::Rejected,
+            'status' => LeaveStatus::Rejected,
             'approved_at' => now(),
         ]);
     }

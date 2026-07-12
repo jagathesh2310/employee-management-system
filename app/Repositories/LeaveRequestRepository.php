@@ -85,7 +85,7 @@ class LeaveRequestRepository implements LeaveRequestRepositoryInterface
     {
         return DB::transaction(function () use ($leaveRequest, $approver) {
             $leaveRequest->update([
-                'status'      => LeaveStatus::Approved,
+                'status' => LeaveStatus::Approved,
                 'approved_by' => $approver->id,
                 'approved_at' => now(),
             ]);
@@ -101,7 +101,7 @@ class LeaveRequestRepository implements LeaveRequestRepositoryInterface
     {
         return DB::transaction(function () use ($leaveRequest, $approver) {
             $leaveRequest->update([
-                'status'      => LeaveStatus::Rejected,
+                'status' => LeaveStatus::Rejected,
                 'approved_by' => $approver->id,
                 'approved_at' => now(),
             ]);

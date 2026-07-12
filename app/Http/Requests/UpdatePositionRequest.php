@@ -26,9 +26,9 @@ class UpdatePositionRequest extends FormRequest
         $position = $this->route('position');
 
         return [
-            'name'        => ['sometimes', 'required', 'string', 'min:2', 'max:150',
+            'name' => ['sometimes', 'required', 'string', 'min:2', 'max:150',
                 Rule::unique('positions', 'name')->ignore($position->id)],
-            'level'       => ['sometimes', 'required', 'integer', 'min:1', 'max:10'],
+            'level' => ['sometimes', 'required', 'integer', 'min:1', 'max:10'],
             'description' => ['nullable', 'string', 'max:1000'],
         ];
     }

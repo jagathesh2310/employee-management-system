@@ -33,7 +33,8 @@ class ProcessLeaveNotificationJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    public int $tries   = 3;
+    public int $tries = 3;
+
     public int $timeout = 60;
 
     public function __construct(
@@ -58,7 +59,7 @@ class ProcessLeaveNotificationJob implements ShouldQueue
         $notification = match ($this->status) {
             'approved' => new LeaveApprovedNotification($this->leaveRequest),
             'rejected' => new LeaveRejectedNotification($this->leaveRequest),
-            default    => null,
+            default => null,
         };
 
         if ($notification === null) {
@@ -73,7 +74,7 @@ class ProcessLeaveNotificationJob implements ShouldQueue
 
         Log::info("Leave notification sent to {$employee->email}", [
             'leave_id' => $this->leaveRequest->id,
-            'status'   => $this->status,
+            'status' => $this->status,
         ]);
     }
 
@@ -81,8 +82,8 @@ class ProcessLeaveNotificationJob implements ShouldQueue
     {
         Log::error('Failed to send leave notification', [
             'leave_id' => $this->leaveRequest->id,
-            'status'   => $this->status,
-            'error'    => $exception->getMessage(),
+            'status' => $this->status,
+            'error' => $exception->getMessage(),
         ]);
     }
 }

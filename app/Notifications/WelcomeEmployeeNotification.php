@@ -38,7 +38,6 @@ class WelcomeEmployeeNotification extends Notification
     /**
      * Declare delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array<string>
      */
     public function via(mixed $notifiable): array
@@ -55,14 +54,14 @@ class WelcomeEmployeeNotification extends Notification
      */
     public function toMail(mixed $notifiable): MailMessage
     {
-        return (new MailMessage())
+        return (new MailMessage)
             ->subject("Welcome to the team, {$this->employee->first_name}!")
             ->greeting("Hello, {$this->employee->full_name}!")
             ->line('Welcome to the Employee Management System. Your account has been created.')
             ->line("Your Employee ID is: **{$this->employee->employee_id}**")
             ->line("Department: **{$this->employee->department?->name}**")
             ->line("Position: **{$this->employee->position?->name}**")
-            ->action('View Your Profile', url('/api/v1/employees/' . $this->employee->id))
+            ->action('View Your Profile', url('/api/v1/employees/'.$this->employee->id))
             ->line('If you have any questions, please contact HR.')
             ->salutation('Best regards, The HR Team');
     }

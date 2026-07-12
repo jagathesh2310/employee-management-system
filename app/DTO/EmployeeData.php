@@ -39,19 +39,19 @@ final class EmployeeData
     public static function fromArray(array $validated): self
     {
         return new self(
-            employeeId:  $validated['employee_id'],
-            firstName:   $validated['first_name'],
-            lastName:    $validated['last_name'],
-            email:       $validated['email'],
-            phone:       $validated['phone'] ?? null,
-            gender:      $validated['gender'] ?? null,
+            employeeId: $validated['employee_id'],
+            firstName: $validated['first_name'],
+            lastName: $validated['last_name'],
+            email: $validated['email'],
+            phone: $validated['phone'] ?? null,
+            gender: $validated['gender'] ?? null,
             dateOfBirth: $validated['date_of_birth'] ?? null,
             joiningDate: $validated['joining_date'],
-            salary:      (float) $validated['salary'],
-            status:      EmployeeStatus::from($validated['status'] ?? EmployeeStatus::Active->value),
+            salary: (float) $validated['salary'],
+            status: EmployeeStatus::from($validated['status'] ?? EmployeeStatus::Active->value),
             departmentId: $validated['department_id'],
-            positionId:   $validated['position_id'],
-            managerId:    $validated['manager_id'] ?? null,
+            positionId: $validated['position_id'],
+            managerId: $validated['manager_id'] ?? null,
         );
     }
 
@@ -61,19 +61,19 @@ final class EmployeeData
     public function toArray(): array
     {
         return [
-            'employee_id'   => $this->employeeId,
-            'first_name'    => $this->firstName,
-            'last_name'     => $this->lastName,
-            'email'         => $this->email,
-            'phone'         => $this->phone,
-            'gender'        => $this->gender,
+            'employee_id' => $this->employeeId,
+            'first_name' => $this->firstName,
+            'last_name' => $this->lastName,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'gender' => $this->gender,
             'date_of_birth' => $this->dateOfBirth,
-            'joining_date'  => $this->joiningDate,
-            'salary'        => $this->salary,
-            'status'        => $this->status->value,
+            'joining_date' => $this->joiningDate,
+            'salary' => $this->salary,
+            'status' => $this->status->value,
             'department_id' => $this->departmentId,
-            'position_id'   => $this->positionId,
-            'manager_id'    => $this->managerId,
+            'position_id' => $this->positionId,
+            'manager_id' => $this->managerId,
         ];
     }
 }

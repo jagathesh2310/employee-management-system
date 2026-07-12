@@ -28,7 +28,7 @@ class EmployeeSeeder extends Seeder
     public function run(): void
     {
         $departments = Department::all();
-        $positions   = Position::all();
+        $positions = Position::all();
 
         // -----------------------------------------------------------------
         // Step 1: Create senior managers (level 4+ positions) – 1 per dept
@@ -41,10 +41,10 @@ class EmployeeSeeder extends Seeder
 
             $manager = Employee::factory()->create([
                 'department_id' => $department->id,
-                'position_id'   => $managerPosition->id,
-                'status'        => EmployeeStatus::Active,
-                'manager_id'    => null, // Top-level managers have no manager
-                'salary'        => fake()->randomFloat(2, 80000, 200000),
+                'position_id' => $managerPosition->id,
+                'status' => EmployeeStatus::Active,
+                'manager_id' => null, // Top-level managers have no manager
+                'salary' => fake()->randomFloat(2, 80000, 200000),
             ]);
 
             $managers[$department->id] = $manager;
@@ -58,16 +58,18 @@ class EmployeeSeeder extends Seeder
 
         Employee::factory()
             ->count($regularCount)
+            ->recycle($departments)
+            ->recycle($positions)
             ->make()
             ->each(function (Employee $employee) use ($departments, $positions, $managers) {
                 // Assign to a random department
                 $department = $departments->random();
-                $position   = $positions->where('level', '<=', 3)->random();
-                $manager    = $managers[$department->id];
+                $position = $positions->where('level', '<=', 3)->random();
+                $manager = $managers[$department->id];
 
                 $employee->department_id = $department->id;
-                $employee->position_id   = $position->id;
-                $employee->manager_id    = $manager->id;
+                $employee->position_id = $position->id;
+                $employee->manager_id = $manager->id;
                 $employee->save();
             });
     }

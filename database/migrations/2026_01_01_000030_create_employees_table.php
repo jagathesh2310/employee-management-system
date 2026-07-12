@@ -66,10 +66,6 @@ return new class extends Migration
 
             // Self-referential FK for manager (nullable – CEO has no manager)
             $table->uuid('manager_id')->nullable();
-            $table->foreign('manager_id')
-                ->references('id')
-                ->on('employees')
-                ->nullOnDelete(); // If manager is deleted, set to null
 
             $table->timestamps();
             $table->softDeletes(); // Soft delete – deleted_at column
@@ -88,6 +84,13 @@ return new class extends Migration
 
             // Full-name search index (first + last)
             $table->index(['first_name', 'last_name'], 'idx_employees_name');
+        });
+
+        Schema::table('employees', function (Blueprint $table) {
+            $table->foreign('manager_id')
+                ->references('id')
+                ->on('employees')
+                ->nullOnDelete(); // If manager is deleted, set to null
         });
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Observers;
 
+use App\Enums\EmployeeStatus;
 use App\Events\EmployeeCreated;
 use App\Events\EmployeeDeleted;
 use App\Events\EmployeeUpdated;
@@ -49,7 +50,7 @@ class EmployeeObserver
         // Auto-set a default status if not provided.
         // (Normally handled by factory/request, but observer provides safety net)
         if (empty($employee->status)) {
-            $employee->status = \App\Enums\EmployeeStatus::Active;
+            $employee->status = EmployeeStatus::Active;
         }
 
         Log::debug("Employee record being created: {$employee->employee_id}");

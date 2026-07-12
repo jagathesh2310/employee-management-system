@@ -8,6 +8,7 @@ use App\Enums\LeaveStatus;
 use App\Models\LeaveRequest;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Translation\PotentiallyTranslatedString;
 
 /**
  * NoOverlappingLeave – ensures an employee cannot have two approved/pending
@@ -43,7 +44,7 @@ class NoOverlappingLeave implements ValidationRule
     /**
      * Run the validation rule.
      *
-     * @param  Closure(string, ?string=): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     * @param  Closure(string, ?string=): PotentiallyTranslatedString  $fail
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {

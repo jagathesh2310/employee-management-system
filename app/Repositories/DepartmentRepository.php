@@ -44,7 +44,7 @@ class DepartmentRepository implements DepartmentRepositoryInterface
         }
 
         // Apply sorting
-        $sortBy        = in_array($filters['sort_by'] ?? 'name', ['name', 'created_at']) ? ($filters['sort_by'] ?? 'name') : 'name';
+        $sortBy = in_array($filters['sort_by'] ?? 'name', ['name', 'created_at']) ? ($filters['sort_by'] ?? 'name') : 'name';
         $sortDirection = ($filters['sort_dir'] ?? 'asc') === 'desc' ? 'desc' : 'asc';
         $query->orderBy($sortBy, $sortDirection);
 

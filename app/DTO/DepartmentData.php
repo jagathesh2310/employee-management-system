@@ -39,8 +39,8 @@ final class DepartmentData
     public static function fromArray(array $validated): self
     {
         return new self(
-            name:        $validated['name'],
-            code:        strtoupper($validated['code']),
+            name: $validated['name'],
+            code: strtoupper($validated['code']),
             description: $validated['description'] ?? null,
         );
     }
@@ -53,8 +53,8 @@ final class DepartmentData
     public function toArray(): array
     {
         return [
-            'name'        => $this->name,
-            'code'        => $this->code,
+            'name' => $this->name,
+            'code' => $this->code,
             'description' => $this->description,
         ];
     }

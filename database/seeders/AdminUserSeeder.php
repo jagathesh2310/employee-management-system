@@ -27,9 +27,9 @@ class AdminUserSeeder extends Seeder
         $admin = User::firstOrCreate(
             ['email' => 'admin@ems.local'],
             [
-                'name'     => 'System Administrator',
+                'name' => 'System Administrator',
                 'password' => Hash::make('password'),
-                'role'     => 'admin',
+                'role' => 'admin',
             ]
         );
 
@@ -37,9 +37,9 @@ class AdminUserSeeder extends Seeder
         User::firstOrCreate(
             ['email' => 'manager@ems.local'],
             [
-                'name'     => 'Department Manager',
+                'name' => 'Department Manager',
                 'password' => Hash::make('password'),
-                'role'     => 'manager',
+                'role' => 'manager',
             ]
         );
 
@@ -47,9 +47,9 @@ class AdminUserSeeder extends Seeder
         User::firstOrCreate(
             ['email' => 'employee@ems.local'],
             [
-                'name'     => 'Regular Employee',
+                'name' => 'Regular Employee',
                 'password' => Hash::make('password'),
-                'role'     => 'employee',
+                'role' => 'employee',
             ]
         );
 

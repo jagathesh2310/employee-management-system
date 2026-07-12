@@ -31,7 +31,7 @@ enum EmployeeStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Active   => 'Active',
+            self::Active => 'Active',
             self::Inactive => 'Inactive',
             self::Resigned => 'Resigned',
         };
@@ -43,7 +43,7 @@ enum EmployeeStatus: string
     public function color(): string
     {
         return match ($this) {
-            self::Active   => 'green',
+            self::Active => 'green',
             self::Inactive => 'yellow',
             self::Resigned => 'red',
         };

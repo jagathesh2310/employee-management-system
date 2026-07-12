@@ -37,8 +37,9 @@ class GenerateEmployeeReportJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    public int $tries    = 1; // Reports shouldn't be retried – they're idempotent but expensive
-    public int $timeout  = 300; // 5 minutes max
+    public int $tries = 1; // Reports shouldn't be retried – they're idempotent but expensive
+
+    public int $timeout = 300; // 5 minutes max
 
     public function __construct()
     {
@@ -55,7 +56,7 @@ class GenerateEmployeeReportJob implements ShouldQueue
      */
     public function handle(EmployeeRepositoryInterface $employeeRepository): void
     {
-        $filename  = 'reports/employees_' . now()->format('Y-m-d_H-i-s') . '.csv';
+        $filename = 'reports/employees_'.now()->format('Y-m-d_H-i-s').'.csv';
         $totalRows = 0;
 
         // Open a stream to write CSV directly to storage (avoids building a huge string)

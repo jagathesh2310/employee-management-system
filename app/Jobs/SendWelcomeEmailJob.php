@@ -88,7 +88,7 @@ class SendWelcomeEmailJob implements ShouldQueue
         // be notifiable.
         Log::info("Sending welcome email to employee {$this->employee->id}", [
             'email' => $this->employee->email,
-            'name'  => $this->employee->full_name,
+            'name' => $this->employee->full_name,
         ]);
 
         // Sending notification directly to email address
@@ -106,8 +106,8 @@ class SendWelcomeEmailJob implements ShouldQueue
     {
         Log::error('Failed to send welcome email', [
             'employee_id' => $this->employee->id,
-            'email'       => $this->employee->email,
-            'error'       => $exception->getMessage(),
+            'email' => $this->employee->email,
+            'error' => $exception->getMessage(),
         ]);
     }
 }

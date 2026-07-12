@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Contracts\DepartmentRepositoryInterface;
 use App\Contracts\EmployeeRepositoryInterface;
+use App\Contracts\FaqRepositoryInterface;
 use App\Contracts\LeaveRequestRepositoryInterface;
 use App\Contracts\PositionRepositoryInterface;
 use App\Events\EmployeeCreated;
@@ -11,7 +12,6 @@ use App\Events\EmployeeDeleted;
 use App\Events\EmployeeUpdated;
 use App\Events\LeaveApproved;
 use App\Events\LeaveRejected;
-use App\Events\LeaveRequested;
 use App\Listeners\ClearDepartmentCache;
 use App\Listeners\ClearEmployeeCache;
 use App\Listeners\LogEmployeeActivity;
@@ -23,6 +23,7 @@ use App\Observers\EmployeeObserver;
 use App\Observers\LeaveRequestObserver;
 use App\Repositories\DepartmentRepository;
 use App\Repositories\EmployeeRepository;
+use App\Repositories\FaqRepository;
 use App\Repositories\LeaveRequestRepository;
 use App\Repositories\PositionRepository;
 use Illuminate\Support\Facades\Event;
@@ -39,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(DepartmentRepositoryInterface::class, DepartmentRepository::class);
         $this->app->bind(PositionRepositoryInterface::class, PositionRepository::class);
         $this->app->bind(EmployeeRepositoryInterface::class, EmployeeRepository::class);
+        $this->app->bind(FaqRepositoryInterface::class, FaqRepository::class);
         $this->app->bind(LeaveRequestRepositoryInterface::class, LeaveRequestRepository::class);
     }
 
@@ -56,7 +58,7 @@ class AppServiceProvider extends ServiceProvider
         // ---------------------------------------------------------
         // Events & Listeners
         // ---------------------------------------------------------
-        
+
         // Employee Events
         Event::listen(EmployeeCreated::class, [ClearEmployeeCache::class, 'handleEmployeeCreated']);
         Event::listen(EmployeeCreated::class, [ClearDepartmentCache::class, 'handleEmployeeCreated']);

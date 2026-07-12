@@ -21,14 +21,14 @@ namespace App\Enums;
 enum LeaveType: string
 {
     case Casual = 'casual';
-    case Sick   = 'sick';
+    case Sick = 'sick';
     case Earned = 'earned';
 
     public function label(): string
     {
         return match ($this) {
             self::Casual => 'Casual Leave',
-            self::Sick   => 'Sick Leave',
+            self::Sick => 'Sick Leave',
             self::Earned => 'Earned Leave',
         };
     }
@@ -40,7 +40,7 @@ enum LeaveType: string
     {
         return match ($this) {
             self::Casual => 12,
-            self::Sick   => 15,
+            self::Sick => 15,
             self::Earned => 21,
         };
     }

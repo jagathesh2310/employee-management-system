@@ -9,6 +9,7 @@ use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Position;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
 
 /**
  * WHY THIS EXISTS:
@@ -34,25 +35,25 @@ class EmployeeFactory extends Factory
      */
     public function definition(): array
     {
-        $gender = $this->faker->randomElement(['male', 'female']);
+        $gender = Arr::random(['male', 'female']);
 
         return [
             // Unique business identifier – padded to 3 digits (EMP-001 ... EMP-999)
-            'employee_id'   => 'EMP-' . str_pad((string) static::$employeeIdCounter++, 3, '0', STR_PAD_LEFT),
-            'first_name'    => $gender === 'male'
+            'employee_id' => 'EMP-'.str_pad((string) static::$employeeIdCounter++, 3, '0', STR_PAD_LEFT),
+            'first_name' => $gender === 'male'
                 ? $this->faker->firstNameMale()
                 : $this->faker->firstNameFemale(),
-            'last_name'     => $this->faker->lastName(),
-            'email'         => $this->faker->unique()->safeEmail(),
-            'phone'         => $this->faker->phoneNumber(),
-            'gender'        => $gender,
+            'last_name' => $this->faker->lastName(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'phone' => $this->faker->phoneNumber(),
+            'gender' => $gender,
             'date_of_birth' => $this->faker->dateTimeBetween('-55 years', '-22 years')->format('Y-m-d'),
-            'joining_date'  => $this->faker->dateTimeBetween('-10 years', 'now')->format('Y-m-d'),
-            'salary'        => $this->faker->randomFloat(2, 30000, 200000),
-            'status'        => EmployeeStatus::Active,
+            'joining_date' => $this->faker->dateTimeBetween('-10 years', 'now')->format('Y-m-d'),
+            'salary' => $this->faker->randomFloat(2, 30000, 200000),
+            'status' => EmployeeStatus::Active,
             'department_id' => Department::factory(),
-            'position_id'   => Position::factory(),
-            'manager_id'    => null,
+            'position_id' => Position::factory(),
+            'manager_id' => null,
         ];
     }
 
@@ -98,7 +99,7 @@ class EmployeeFactory extends Factory
     public function withManager(Employee $manager): static
     {
         return $this->state(fn (array $attributes) => [
-            'manager_id'    => $manager->id,
+            'manager_id' => $manager->id,
             'department_id' => $manager->department_id,
         ]);
     }

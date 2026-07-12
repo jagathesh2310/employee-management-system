@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * WHY THIS EXISTS:
@@ -45,8 +46,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $email
  * @property string|null $phone
  * @property string|null $gender
- * @property \Illuminate\Support\Carbon|null $date_of_birth
- * @property \Illuminate\Support\Carbon $joining_date
+ * @property Carbon|null $date_of_birth
+ * @property Carbon $joining_date
  * @property float $salary
  * @property EmployeeStatus $status
  * @property string $department_id
@@ -91,10 +92,10 @@ class Employee extends Model
     protected function casts(): array
     {
         return [
-            'status'        => EmployeeStatus::class,
+            'status' => EmployeeStatus::class,
             'date_of_birth' => 'date',
-            'joining_date'  => 'date',
-            'salary'        => 'decimal:2',
+            'joining_date' => 'date',
+            'salary' => 'decimal:2',
         ];
     }
 

@@ -34,9 +34,9 @@ class UpdateDepartmentRequest extends FormRequest
         $department = $this->route('department');
 
         return [
-            'name'        => ['sometimes', 'required', 'string', 'min:2', 'max:150'],
+            'name' => ['sometimes', 'required', 'string', 'min:2', 'max:150'],
             // Rule::unique()->ignore(): unique but excluding the current record
-            'code'        => [
+            'code' => [
                 'sometimes', 'required', 'string', 'max:20', 'regex:/^[A-Z0-9]+$/i',
                 Rule::unique('departments', 'code')->ignore($department->id),
             ],

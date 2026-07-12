@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\Models\Department;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -32,7 +33,7 @@ class StoreDepartmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()?->can('create', \App\Models\Department::class) ?? false;
+        return $this->user()?->can('create', Department::class) ?? false;
     }
 
     /**
@@ -41,9 +42,9 @@ class StoreDepartmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'        => ['required', 'string', 'min:2', 'max:150'],
+            'name' => ['required', 'string', 'min:2', 'max:150'],
             // unique with table/column – prevents duplicate department codes
-            'code'        => ['required', 'string', 'max:20', 'unique:departments,code', 'regex:/^[A-Z0-9]+$/i'],
+            'code' => ['required', 'string', 'max:20', 'unique:departments,code', 'regex:/^[A-Z0-9]+$/i'],
             'description' => ['nullable', 'string', 'max:1000'],
         ];
     }
@@ -55,7 +56,7 @@ class StoreDepartmentRequest extends FormRequest
     {
         return [
             'code.unique' => 'This department code is already in use. Please choose a different one.',
-            'code.regex'  => 'Department code must contain only letters and numbers (no spaces).',
+            'code.regex' => 'Department code must contain only letters and numbers (no spaces).',
         ];
     }
 }

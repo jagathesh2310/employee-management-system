@@ -28,7 +28,7 @@ class LeaveRequestSeeder extends Seeder
 
         // Distribute 500 leave requests across all employees
         $targetCount = 500;
-        $created     = 0;
+        $created = 0;
 
         // Use cursor() for memory-efficient iteration
         Employee::withoutGlobalScopes()->cursor()->each(function (Employee $employee) use ($admin, $targetCount, &$created) {
@@ -41,7 +41,7 @@ class LeaveRequestSeeder extends Seeder
 
             for ($i = 0; $i < $count; $i++) {
                 $startDate = fake()->dateTimeBetween('-2 years', '+2 months');
-                $endDate   = (clone $startDate)->modify('+' . fake()->numberBetween(1, 10) . ' days');
+                $endDate = (clone $startDate)->modify('+'.fake()->numberBetween(1, 10).' days');
 
                 $status = fake()->randomElement([
                     LeaveStatus::Pending,
@@ -51,11 +51,11 @@ class LeaveRequestSeeder extends Seeder
 
                 LeaveRequest::create([
                     'employee_id' => $employee->id,
-                    'leave_type'  => fake()->randomElement(['casual', 'sick', 'earned']),
-                    'start_date'  => $startDate->format('Y-m-d'),
-                    'end_date'    => $endDate->format('Y-m-d'),
-                    'reason'      => fake()->sentence(8),
-                    'status'      => $status,
+                    'leave_type' => fake()->randomElement(['casual', 'sick', 'earned']),
+                    'start_date' => $startDate->format('Y-m-d'),
+                    'end_date' => $endDate->format('Y-m-d'),
+                    'reason' => fake()->sentence(8),
+                    'status' => $status,
                     'approved_by' => in_array($status, [LeaveStatus::Approved, LeaveStatus::Rejected]) ? $admin?->id : null,
                     'approved_at' => in_array($status, [LeaveStatus::Approved, LeaveStatus::Rejected]) ? now() : null,
                 ]);

@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * WHY THIS EXISTS:
@@ -31,12 +32,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $id
  * @property string $employee_id
  * @property LeaveType $leave_type
- * @property \Illuminate\Support\Carbon $start_date
- * @property \Illuminate\Support\Carbon $end_date
+ * @property Carbon $start_date
+ * @property Carbon $end_date
  * @property string|null $reason
  * @property LeaveStatus $status
  * @property int|null $approved_by
- * @property \Illuminate\Support\Carbon|null $approved_at
+ * @property Carbon|null $approved_at
  */
 class LeaveRequest extends Model
 {
@@ -61,10 +62,10 @@ class LeaveRequest extends Model
     protected function casts(): array
     {
         return [
-            'leave_type'  => LeaveType::class,
-            'status'      => LeaveStatus::class,
-            'start_date'  => 'date',
-            'end_date'    => 'date',
+            'leave_type' => LeaveType::class,
+            'status' => LeaveStatus::class,
+            'start_date' => 'date',
+            'end_date' => 'date',
             'approved_at' => 'datetime',
         ];
     }

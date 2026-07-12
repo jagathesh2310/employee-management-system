@@ -21,8 +21,8 @@ final class PositionData
     public static function fromArray(array $validated): self
     {
         return new self(
-            name:        $validated['name'],
-            level:       (int) $validated['level'],
+            name: $validated['name'],
+            level: (int) $validated['level'],
             description: $validated['description'] ?? null,
         );
     }
@@ -33,8 +33,8 @@ final class PositionData
     public function toArray(): array
     {
         return [
-            'name'        => $this->name,
-            'level'       => $this->level,
+            'name' => $this->name,
+            'level' => $this->level,
             'description' => $this->description,
         ];
     }

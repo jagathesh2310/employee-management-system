@@ -21,7 +21,6 @@ class LeaveRejectedNotification extends Notification
     ) {}
 
     /**
-     * @param  mixed  $notifiable
      * @return array<string>
      */
     public function via(mixed $notifiable): array
@@ -31,11 +30,11 @@ class LeaveRejectedNotification extends Notification
 
     public function toMail(mixed $notifiable): MailMessage
     {
-        $employee  = $this->leaveRequest->employee;
+        $employee = $this->leaveRequest->employee;
         $startDate = $this->leaveRequest->start_date->format('d M Y');
-        $endDate   = $this->leaveRequest->end_date->format('d M Y');
+        $endDate = $this->leaveRequest->end_date->format('d M Y');
 
-        return (new MailMessage())
+        return (new MailMessage)
             ->subject('Your Leave Request Could Not Be Approved')
             ->greeting("Hello, {$employee?->first_name}!")
             ->line('We regret to inform you that your leave request has been **rejected**.')

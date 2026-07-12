@@ -1,5 +1,14 @@
 <?php
 
+use App\Contracts\DepartmentRepositoryInterface;
+use App\Contracts\EmployeeRepositoryInterface;
+use App\Contracts\LeaveRequestRepositoryInterface;
+use App\Contracts\PositionRepositoryInterface;
+use App\Repositories\DepartmentRepository;
+use App\Repositories\EmployeeRepository;
+use App\Repositories\LeaveRequestRepository;
+use App\Repositories\PositionRepository;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -13,9 +22,9 @@ return [
     */
 
     'bindings' => [
-        \App\Contracts\DepartmentRepositoryInterface::class => \App\Repositories\DepartmentRepository::class,
-        \App\Contracts\PositionRepositoryInterface::class   => \App\Repositories\PositionRepository::class,
-        \App\Contracts\EmployeeRepositoryInterface::class   => \App\Repositories\EmployeeRepository::class,
-        \App\Contracts\LeaveRequestRepositoryInterface::class => \App\Repositories\LeaveRequestRepository::class,
+        DepartmentRepositoryInterface::class => DepartmentRepository::class,
+        PositionRepositoryInterface::class => PositionRepository::class,
+        EmployeeRepositoryInterface::class => EmployeeRepository::class,
+        LeaveRequestRepositoryInterface::class => LeaveRequestRepository::class,
     ],
 ];

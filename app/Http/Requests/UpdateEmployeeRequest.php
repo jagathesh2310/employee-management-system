@@ -33,21 +33,21 @@ class UpdateEmployeeRequest extends FormRequest
         $employee = $this->route('employee');
 
         return [
-            'employee_id'   => ['sometimes', 'required', 'string', 'max:20', 'regex:/^EMP-\d{3,}$/',
+            'employee_id' => ['sometimes', 'required', 'string', 'max:20', 'regex:/^EMP-\d{3,}$/',
                 Rule::unique('employees', 'employee_id')->ignore($employee->id)],
-            'first_name'    => ['sometimes', 'required', 'string', 'min:1', 'max:100'],
-            'last_name'     => ['sometimes', 'required', 'string', 'min:1', 'max:100'],
-            'email'         => ['sometimes', 'required', 'email', 'max:255',
+            'first_name' => ['sometimes', 'required', 'string', 'min:1', 'max:100'],
+            'last_name' => ['sometimes', 'required', 'string', 'min:1', 'max:100'],
+            'email' => ['sometimes', 'required', 'email', 'max:255',
                 Rule::unique('employees', 'email')->ignore($employee->id)],
-            'phone'         => ['nullable', 'string', 'max:20'],
-            'gender'        => ['nullable', 'string', 'in:male,female,other'],
+            'phone' => ['nullable', 'string', 'max:20'],
+            'gender' => ['nullable', 'string', 'in:male,female,other'],
             'date_of_birth' => ['nullable', 'date', 'before:-18 years'],
-            'joining_date'  => ['sometimes', 'required', 'date', 'before_or_equal:today'],
-            'salary'        => ['sometimes', 'required', 'numeric', 'min:0', 'max:99999999.99'],
-            'status'        => ['sometimes', 'required', Rule::enum(EmployeeStatus::class)],
+            'joining_date' => ['sometimes', 'required', 'date', 'before_or_equal:today'],
+            'salary' => ['sometimes', 'required', 'numeric', 'min:0', 'max:99999999.99'],
+            'status' => ['sometimes', 'required', Rule::enum(EmployeeStatus::class)],
             'department_id' => ['sometimes', 'required', 'uuid', 'exists:departments,id'],
-            'position_id'   => ['sometimes', 'required', 'uuid', 'exists:positions,id'],
-            'manager_id'    => ['nullable', 'uuid', 'exists:employees,id',
+            'position_id' => ['sometimes', 'required', 'uuid', 'exists:positions,id'],
+            'manager_id' => ['nullable', 'uuid', 'exists:employees,id',
                 // An employee cannot be their own manager
                 Rule::notIn([$employee->id])],
         ];
