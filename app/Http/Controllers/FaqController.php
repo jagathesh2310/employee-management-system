@@ -1,74 +1,103 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use App\Contracts\FaqRepositoryInterface;
+use App\Http\Requests\SearchFaqRequest;
+use App\Http\Requests\StoreFaqRequest;
+use App\Http\Requests\UpdateFaqRequest;
 use App\Models\Faq;
+use App\Services\FaqService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class FaqController extends Controller
 {
     public function __construct(
-        public FaqRepositoryInterface $faqRepository
+        private readonly FaqService $faqService,
     ) {}
 
     /**
-     * Display a listing of the resource.
+     * Display a paginated listing of FAQs.
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
-        $faqs = $this->faqRepository->paginate($request->all());
+        $filters = $request->only(['search', 'sort_by', 'sort_dir', 'status']);
+        $faqs = $this->faqService->getPaginated($filters);
 
-        return response()->json($faqs);
+        return view('faqs.index', compact('faqs', 'filters'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show the form for creating a new FAQ.
      */
-    public function store(Request $request)
+    public function create(): View
     {
-        $validated = $request->validate([
-            'question' => 'required|string|max:255',
-            'answer' => 'required|string',
-            'is_active' => 'boolean',
-        ]);
-
-        $faq = $this->faqRepository->create($validated);
-
-        return response()->json($faq, 201);
+        return view('faqs.create');
     }
 
     /**
-     * Display the specified resource.
+     * Store a newly created FAQ.
      */
-    public function show(Faq $faq)
+    public function store(StoreFaqRequest $request): RedirectResponse
     {
-        return response()->json($faq);
+        $this->faqService->create($request->validated());
+
+        return redirect()->route('faqs.index')->with('success', 'FAQ created successfully. Embedding will be generated shortly.');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Display the specified FAQ.
      */
-    public function update(Request $request, Faq $faq)
+    public function show(Faq $faq): View
     {
-        $validated = $request->validate([
-            'question' => 'sometimes|required|string|max:255',
-            'answer' => 'sometimes|required|string',
-            'is_active' => 'boolean',
-        ]);
-
-        $faq = $this->faqRepository->update($faq, $validated);
-
-        return response()->json($faq);
+        return view('faqs.show', compact('faq'));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Show the form for editing the specified FAQ.
      */
-    public function destroy(Faq $faq)
+    public function edit(Faq $faq): View
     {
-        $this->faqRepository->delete($faq);
+        return view('faqs.edit', compact('faq'));
+    }
 
-        return response()->json(null, 204);
+    /**
+     * Update the specified FAQ.
+     */
+    public function update(UpdateFaqRequest $request, Faq $faq): RedirectResponse
+    {
+        $this->faqService->update($faq, $request->validated());
+
+        return redirect()->route('faqs.index')->with('success', 'FAQ updated successfully.');
+    }
+
+    /**
+     * Remove the specified FAQ.
+     */
+    public function destroy(Faq $faq): RedirectResponse
+    {
+        $this->faqService->delete($faq);
+
+        return redirect()->route('faqs.index')->with('success', 'FAQ deleted successfully.');
+    }
+
+    /**
+     * Perform a semantic similarity search across FAQs.
+     */
+    public function search(SearchFaqRequest $request): View
+    {
+        $results = collect();
+        $validated = $request->safe()->only(['query', 'limit']);
+        $queryText = $validated['query'] ?? '';
+        $limit = (int) ($validated['limit'] ?? 5);
+
+        if ($request->filled('query')) {
+            $results = $this->faqService->semanticSearch($queryText, $limit);
+        }
+
+        return view('faqs.search', compact('results', 'queryText', 'limit'));
     }
 }

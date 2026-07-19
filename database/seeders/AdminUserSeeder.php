@@ -25,7 +25,7 @@ class AdminUserSeeder extends Seeder
     {
         // Admin user – full system access
         $admin = User::firstOrCreate(
-            ['email' => 'admin@ems.local'],
+            ['email' => 'admin@gmail.com'],
             [
                 'name' => 'System Administrator',
                 'password' => Hash::make('password'),

@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Contracts\DepartmentRepositoryInterface;
 use App\Contracts\EmployeeRepositoryInterface;
-use App\Contracts\FaqRepositoryInterface;
 use App\Contracts\LeaveRequestRepositoryInterface;
 use App\Contracts\PositionRepositoryInterface;
 use App\Events\EmployeeCreated;
@@ -23,7 +22,6 @@ use App\Observers\EmployeeObserver;
 use App\Observers\LeaveRequestObserver;
 use App\Repositories\DepartmentRepository;
 use App\Repositories\EmployeeRepository;
-use App\Repositories\FaqRepository;
 use App\Repositories\LeaveRequestRepository;
 use App\Repositories\PositionRepository;
 use Illuminate\Support\Facades\Event;
@@ -40,8 +38,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(DepartmentRepositoryInterface::class, DepartmentRepository::class);
         $this->app->bind(PositionRepositoryInterface::class, PositionRepository::class);
         $this->app->bind(EmployeeRepositoryInterface::class, EmployeeRepository::class);
-        $this->app->bind(FaqRepositoryInterface::class, FaqRepository::class);
         $this->app->bind(LeaveRequestRepositoryInterface::class, LeaveRequestRepository::class);
+        // Note: Faq does NOT use a repository – FaqService calls Eloquent directly.
     }
 
     /**

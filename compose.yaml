@@ -27,7 +27,7 @@ services:
             - redis
             - mailpit
     pgsql:
-        image: 'postgres:18-alpine'
+        image: 'pgvector/pgvector:pg18'
         ports:
             - '${FORWARD_DB_PORT:-5432}:5432'
         environment:
@@ -76,6 +76,8 @@ services:
 networks:
     sail:
         driver: bridge
+        driver_opts:
+            com.docker.network.driver.mtu: "1420"
 volumes:
     sail-pgsql:
         driver: local

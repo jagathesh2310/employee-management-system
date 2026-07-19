@@ -12,6 +12,14 @@ class FaqSeeder extends Seeder
      */
     public function run(): void
     {
-        Faq::factory(10)->create();
+        $faqs = require database_path('data/faqs.php');
+
+        foreach ($faqs as $faq) {
+            Faq::create([
+                'question' => $faq['question'],
+                'answer' => $faq['answer'],
+                'is_active' => true,
+            ]);
+        }
     }
 }

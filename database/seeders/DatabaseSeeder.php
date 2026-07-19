@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             PositionSeeder::class,       // 3. Positions
             EmployeeSeeder::class,       // 4. Employees (need departments & positions)
             LeaveRequestSeeder::class,   // 5. Leave Requests (need employees & users)
+            FaqSeeder::class,
         ]);
     }
 }
