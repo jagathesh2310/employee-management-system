@@ -54,6 +54,8 @@ class LeaveRequest extends Model
         'status',
         'approved_by',
         'approved_at',
+        'ai_analysis',
+        'ai_analysis_status',
     ];
 
     /**
@@ -67,6 +69,7 @@ class LeaveRequest extends Model
             'start_date' => 'date',
             'end_date' => 'date',
             'approved_at' => 'datetime',
+            'ai_analysis' => 'array',
         ];
     }
 
@@ -155,6 +158,10 @@ class LeaveRequest extends Model
      */
     public function getDurationInDaysAttribute(): int
     {
-        return $this->start_date->diffInDays($this->end_date) + 1;
+        if (! $this->start_date || ! $this->end_date) {
+            return 0;
+        }
+
+        return (int) ($this->start_date->diffInDays($this->end_date) + 1);
     }
 }

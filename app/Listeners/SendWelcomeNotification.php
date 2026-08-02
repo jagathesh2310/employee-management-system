@@ -33,17 +33,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
  */
 class SendWelcomeNotification implements ShouldQueue
 {
-    /**
-     * The queue this listener runs on.
-     * WHY NAMED QUEUE: Separating notification jobs into their own queue
-     * prevents email delays from blocking higher-priority jobs.
-     */
-    public string $queue = 'notifications';
-
     public function handle(EmployeeCreated $event): void
     {
         // Dispatch the job instead of sending directly.
         // The job handles retry logic, failure handling, etc.
-        SendWelcomeEmailJob::dispatch($event->employee);
+        // SendWelcomeEmailJob::dispatch($event->employee);
     }
 }

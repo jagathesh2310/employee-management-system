@@ -23,8 +23,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
  */
 class SendLeaveStatusNotification implements ShouldQueue
 {
-    public string $queue = 'notifications';
-
     /**
      * Number of retry attempts if the job fails.
      * WHY 3: Network/SMTP failures are transient; 3 attempts covers most cases.
@@ -33,11 +31,11 @@ class SendLeaveStatusNotification implements ShouldQueue
 
     public function handleLeaveApproved(LeaveApproved $event): void
     {
-        ProcessLeaveNotificationJob::dispatch($event->leaveRequest, 'approved');
+        // ProcessLeaveNotificationJob::dispatch($event->leaveRequest, 'approved');
     }
 
     public function handleLeaveRejected(LeaveRejected $event): void
     {
-        ProcessLeaveNotificationJob::dispatch($event->leaveRequest, 'rejected');
+        // ProcessLeaveNotificationJob::dispatch($event->leaveRequest, 'rejected');
     }
 }

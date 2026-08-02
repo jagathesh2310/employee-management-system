@@ -16,7 +16,7 @@ use Laravel\Ai\Embeddings;
 /**
  * GenerateFaqEmbeddingJob – generates a pgvector embedding for a FAQ.
  *
- * Runs on the "embeddings" queue (managed by Supervisor).
+ * Runs on the "default" queue (managed by Supervisor).
  * Dispatched by FaqService after create/update when question or answer changes.
  *
  * Retry strategy:
@@ -45,10 +45,7 @@ class GenerateFaqEmbeddingJob implements ShouldQueue
      */
     public int $timeout = 120;
 
-    public function __construct(public readonly Faq $faq)
-    {
-        $this->onQueue('embeddings');
-    }
+    public function __construct(public readonly Faq $faq) {}
 
     /**
      * Execute the job.

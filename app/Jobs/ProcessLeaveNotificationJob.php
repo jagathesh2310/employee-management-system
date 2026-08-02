@@ -41,7 +41,7 @@ class ProcessLeaveNotificationJob implements ShouldQueue
         public readonly LeaveRequest $leaveRequest,
         public readonly string $status, // 'approved' | 'rejected'
     ) {
-        $this->onQueue('notifications');
+        $this->onQueue('default');
     }
 
     public function handle(): void
