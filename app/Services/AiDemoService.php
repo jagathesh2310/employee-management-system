@@ -90,7 +90,7 @@ class AiDemoService
     public function proposeApproval(string $topic): AgentResponse
     {
         return ApprovalAgent::make()->prompt(
-            "Draft a professional HR FAQ entry about: {$topic}",
+            "Draft a professional HR FAQ entry about: {$topic}",//[233,]
             provider: Lab::Gemini
         );
     }

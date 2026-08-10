@@ -15,15 +15,15 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             {{-- Tier 1 --}}
-            <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">Tier 1 — Core Features</h2>
+            <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">Core Features</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
 
                 @php
                 $demos = [
-                    ['route' => 'demo.ai.agent',      'icon' => '🧠', 'title' => 'Agent',           'badge' => 'Tier 1', 'color' => 'indigo', 'teach' => 'Agent = reusable AI capability class', 'desc' => 'Type any HR question. The HrAssistant agent responds using its system instructions.'],
-                    ['route' => 'demo.ai.tools',      'icon' => '🔧', 'title' => 'Tools',           'badge' => 'Tier 1', 'color' => 'blue',   'teach' => 'Tools let agents query real app data', 'desc' => 'Agent uses LookupEmployee, ListLeaveRequests, and SearchFAQ tools. See the full tool trace.'],
-                    ['route' => 'demo.ai.structured', 'icon' => '📋', 'title' => 'Structured Output','badge' => 'Tier 1', 'color' => 'purple', 'teach' => 'Schema-enforced JSON output, rendered as UI', 'desc' => 'Describe a leave scenario. Get back structured fields: summary, action, confidence, citations.'],
-                    ['route' => 'demo.ai.faq-search', 'icon' => '🔍', 'title' => 'FAQ Semantic Search','badge' => 'Tier 1','color' => 'teal', 'teach' => 'Meaning match vs. keyword match', 'desc' => 'Search HR FAQs side-by-side: ILIKE keyword results vs. pgvector semantic results.'],
+                    ['route' => 'demo.ai.agent',      'icon' => '🧠', 'title' => 'Agent',            'color' => 'indigo', 'teach' => 'Agent = reusable AI capability class', 'desc' => 'Type any HR question. The HrAssistant agent responds using its system instructions.'],
+                    ['route' => 'demo.ai.tools',      'icon' => '🔧', 'title' => 'Tools',            'color' => 'blue',   'teach' => 'Tools let agents query real app data', 'desc' => 'Agent uses LookupEmployee, ListLeaveRequests, and SearchFAQ tools. See the full tool trace.'],
+                    ['route' => 'demo.ai.structured', 'icon' => '📋', 'title' => 'Structured Output', 'color' => 'purple', 'teach' => 'Schema-enforced JSON output, rendered as UI', 'desc' => 'Describe a leave scenario. Get back structured fields: summary, action, confidence, citations.'],
+                    ['route' => 'demo.ai.faq-search', 'icon' => '🔍', 'title' => 'FAQ Semantic Search','color' => 'teal', 'teach' => 'Meaning match vs. keyword match', 'desc' => 'Search HR FAQs side-by-side: ILIKE keyword results vs. pgvector semantic results.'],
                 ];
                 @endphp
 
@@ -34,7 +34,6 @@
                         <div class="flex items-start justify-between mb-3">
                             <span class="text-3xl">{{ $demo['icon'] }}</span>
                             <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-{{ $demo['color'] }}-50 text-{{ $demo['color'] }}-700 border border-{{ $demo['color'] }}-200">
-                                {{ $demo['badge'] }}
                             </span>
                         </div>
                         <h3 class="text-lg font-semibold text-gray-900 group-hover:text-{{ $demo['color'] }}-700 transition-colors">{{ $demo['title'] }}</h3>
@@ -48,18 +47,16 @@
                 @endforeach
             </div>
 
-            {{-- Tier 2 --}}
-            <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">Tier 2 — Advanced Features</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
 
                 @php
                 $tier2 = [
-                    ['route' => 'demo.ai.chat',      'icon' => '💬', 'title' => 'Multi-turn Chat',   'badge' => 'Tier 2', 'color' => 'green',  'teach' => 'Persistent conversations across turns', 'desc' => 'Chat with the HR assistant. Ask follow-up questions — it remembers earlier context.'],
-                    ['route' => 'demo.ai.stream',    'icon' => '⚡', 'title' => 'Streaming',         'badge' => 'Tier 2', 'color' => 'yellow', 'teach' => 'Token-by-token SSE streaming to browser', 'desc' => 'Watch the response appear token by token via Server-Sent Events.'],
-                    ['route' => 'demo.ai.queue',     'icon' => '⏳', 'title' => 'Queued Analysis',   'badge' => 'Tier 2', 'color' => 'orange', 'teach' => 'AI tasks run in the background queue', 'desc' => 'Select a leave request. Dispatch AI analysis. Watch status: queued → done.'],
-                    ['route' => 'demo.ai.approval',  'icon' => '✋', 'title' => 'Human Approval',    'badge' => 'Tier 2', 'color' => 'red',    'teach' => 'AI proposes — human decides', 'desc' => 'AI drafts a FAQ entry. You approve (creates it) or reject (nothing happens). Human in the loop.'],
-                    ['route' => 'demo.ai.summarize', 'icon' => '✂️', 'title' => 'Summarize',         'badge' => 'Tier 2', 'color' => 'pink',   'teach' => 'Focused single-purpose agents', 'desc' => 'Paste any HR text. Get a concise 2-4 bullet summary from the SummarizeAgent.'],
-                    ['route' => 'demo.ai.failover',  'icon' => '🔄', 'title' => 'Failover Config',   'badge' => 'Tier 2', 'color' => 'gray',   'teach' => 'Automatic provider failover chain', 'desc' => 'See all configured AI providers and which ones have API keys. Understand failover ordering.'],
+                    ['route' => 'demo.ai.chat',      'icon' => '💬', 'title' => 'Multi-turn Chat', 'color' => 'green',  'teach' => 'Persistent conversations across turns', 'desc' => 'Chat with the HR assistant. Ask follow-up questions — it remembers earlier context.'],
+                    ['route' => 'demo.ai.stream',    'icon' => '⚡', 'title' => 'Streaming',         'color' => 'yellow', 'teach' => 'Token-by-token SSE streaming to browser', 'desc' => 'Watch the response appear token by token via Server-Sent Events.'],
+                    ['route' => 'demo.ai.queue',     'icon' => '⏳', 'title' => 'Queued Analysis',   'color' => 'orange', 'teach' => 'AI tasks run in the background queue', 'desc' => 'Select a leave request. Dispatch AI analysis. Watch status: queued → done.'],
+                    ['route' => 'demo.ai.approval',  'icon' => '✋', 'title' => 'Human Approval',    'color' => 'red',    'teach' => 'AI proposes — human decides', 'desc' => 'AI drafts a FAQ entry. You approve (creates it) or reject (nothing happens). Human in the loop.'],
+                    ['route' => 'demo.ai.summarize', 'icon' => '✂️', 'title' => 'Summarize',         'color' => 'pink',   'teach' => 'Focused single-purpose agents', 'desc' => 'Paste any HR text. Get a concise 2-4 bullet summary from the SummarizeAgent.'],
+                    ['route' => 'demo.ai.failover',  'icon' => '🔄', 'title' => 'Failover Config',   'color' => 'gray',   'teach' => 'Automatic provider failover chain', 'desc' => 'See all configured AI providers and which ones have API keys. Understand failover ordering.'],
                 ];
                 @endphp
 
@@ -70,7 +67,6 @@
                         <div class="flex items-start justify-between mb-3">
                             <span class="text-3xl">{{ $demo['icon'] }}</span>
                             <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-{{ $demo['color'] }}-50 text-{{ $demo['color'] }}-700 border border-{{ $demo['color'] }}-200">
-                                {{ $demo['badge'] }}
                             </span>
                         </div>
                         <h3 class="text-lg font-semibold text-gray-900 group-hover:text-{{ $demo['color'] }}-700 transition-colors">{{ $demo['title'] }}</h3>
@@ -82,13 +78,6 @@
                     </div>
                 </a>
                 @endforeach
-            </div>
-
-            {{-- Footer --}}
-            <div class="mt-8 p-4 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-500">
-                <strong class="text-gray-700">⚙️ Setup (one-time, before session):</strong>
-                <code class="ml-2 text-xs bg-white border border-gray-200 px-2 py-1 rounded">php artisan db:seed --class=DemoAiSeeder</code>
-                &nbsp;—&nbsp;Seeds demo FAQs, employees, and leave requests.
             </div>
         </div>
     </div>
