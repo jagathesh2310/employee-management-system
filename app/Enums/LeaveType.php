@@ -23,6 +23,9 @@ enum LeaveType: string
     case Casual = 'casual';
     case Sick = 'sick';
     case Earned = 'earned';
+    case Medical = 'medical';
+    case Annual = 'annual';
+    case Maternity = 'maternity';
 
     public function label(): string
     {
@@ -30,6 +33,9 @@ enum LeaveType: string
             self::Casual => 'Casual Leave',
             self::Sick => 'Sick Leave',
             self::Earned => 'Earned Leave',
+            self::Medical => 'Medical Leave',
+            self::Annual => 'Annual Leave',
+            self::Maternity => 'Maternity Leave',
         };
     }
 

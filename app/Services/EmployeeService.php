@@ -94,6 +94,6 @@ class EmployeeService
      */
     public function queueReportGeneration(): void
     {
-        GenerateEmployeeReportJob::dispatch();
+        // GenerateEmployeeReportJob::dispatch();
     }
 }

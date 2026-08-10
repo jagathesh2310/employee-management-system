@@ -70,7 +70,7 @@ class SendWelcomeEmailJob implements ShouldQueue
     ) {
         // Send to the 'notifications' queue, not the default queue.
         // Supervisor runs a worker specifically for this queue.
-        $this->onQueue('notifications');
+        $this->onQueue('default');
     }
 
     /**

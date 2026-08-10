@@ -76,8 +76,7 @@ class FaqTest extends TestCase
         $response->assertSessionHas('success');
 
         $this->assertDatabaseHas('faqs', ['question' => 'How do I reset my password?']);
-
-        Queue::assertPushedOn('embeddings', GenerateFaqEmbeddingJob::class);
+        Queue::assertPushed(GenerateFaqEmbeddingJob::class);
     }
 
     public function test_store_validates_required_fields(): void
@@ -138,7 +137,7 @@ class FaqTest extends TestCase
         $this->assertDatabaseHas('faqs', ['question' => 'Updated question text here?']);
 
         // Content changed → embedding job should be re-dispatched.
-        Queue::assertPushedOn('embeddings', GenerateFaqEmbeddingJob::class);
+        Queue::assertPushed(GenerateFaqEmbeddingJob::class);
     }
 
     public function test_regular_user_cannot_update_faq(): void

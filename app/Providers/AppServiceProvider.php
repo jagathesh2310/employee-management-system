@@ -61,7 +61,7 @@ class AppServiceProvider extends ServiceProvider
         Event::listen(EmployeeCreated::class, [ClearEmployeeCache::class, 'handleEmployeeCreated']);
         Event::listen(EmployeeCreated::class, [ClearDepartmentCache::class, 'handleEmployeeCreated']);
         Event::listen(EmployeeCreated::class, [LogEmployeeActivity::class, 'handleEmployeeCreated']);
-        Event::listen(EmployeeCreated::class, SendWelcomeNotification::class); // Queue listener
+        // Event::listen(EmployeeCreated::class, SendWelcomeNotification::class); // Queue listener
 
         Event::listen(EmployeeUpdated::class, [ClearEmployeeCache::class, 'handleEmployeeUpdated']);
         Event::listen(EmployeeUpdated::class, [ClearDepartmentCache::class, 'handleEmployeeUpdated']);
@@ -72,7 +72,7 @@ class AppServiceProvider extends ServiceProvider
         Event::listen(EmployeeDeleted::class, [LogEmployeeActivity::class, 'handleEmployeeDeleted']);
 
         // Leave Request Events
-        Event::listen(LeaveApproved::class, [SendLeaveStatusNotification::class, 'handleLeaveApproved']);
-        Event::listen(LeaveRejected::class, [SendLeaveStatusNotification::class, 'handleLeaveRejected']);
+        // Event::listen(LeaveApproved::class, [SendLeaveStatusNotification::class, 'handleLeaveApproved']);
+        // Event::listen(LeaveRejected::class, [SendLeaveStatusNotification::class, 'handleLeaveRejected']);
     }
 }

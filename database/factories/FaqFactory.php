@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Jobs\GenerateFaqEmbeddingJob;
 use App\Models\Faq;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,5 +23,15 @@ class FaqFactory extends Factory
             'answer' => $this->faker->paragraph(),
             'is_active' => $this->faker->boolean(80),
         ];
+    }
+
+    /**
+     * Configure the model factory.
+     */
+    public function configure(): static
+    {
+        return $this->afterCreating(function (Faq $faq) {
+            GenerateFaqEmbeddingJob::dispatch($faq);
+        });
     }
 }
